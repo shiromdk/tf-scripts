@@ -3,31 +3,6 @@ data "aws_route53_zone" "public" {
   private_zone = false
 }
 
-resource "aws_acm_certificate" "mysite" {
-  domain_name       = var.domainName
-  validation_method = "DNS"
-  lifecycle {
-    create_before_destroy = true
-  }
-  tags = {
-    Environment = var.SiteTags
-  }
-}
-
-resource "aws_route53_record" "cert_validation" {
-  allow_overwrite = true
-  name            = tolist(aws_acm_certificate.mysite.domain_validation_options)[0].resource_record_name
-  records         = [ tolist(aws_acm_certificate.mysite.domain_validation_options)[0].resource_record_value ]
-  type            = tolist(aws_acm_certificate.mysite.domain_validation_options)[0].resource_record_type
-  zone_id  = data.aws_route53_zone.public.id
-  ttl      = 300
-}
-
-resource "aws_acm_certificate_validation" "cert" {
-  certificate_arn         = aws_acm_certificate.mysite.arn
-  validation_record_fqdns = [ aws_route53_record.cert_validation.fqdn ]
-}
-
 resource "aws_route53_record" "web" {
   zone_id = data.aws_route53_zone.public.id
   name    = var.subDomainName

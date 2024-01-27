@@ -8,7 +8,3 @@ variable "domainName" {
 variable "subDomainName" {
   type = string
 }
-
-variable "certArn" {
-  type = string
-}

@@ -3,5 +3,7 @@ variable "SiteTags" {
 }
 variable "domainName" {
   type = string
-  default = "playtoday.cc"
+}
+variable "subDomainName" {
+  type = string
 }

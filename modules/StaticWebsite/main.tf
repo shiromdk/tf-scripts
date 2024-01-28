@@ -12,9 +12,20 @@ provider "aws" {
   
 }
 
-module "cloudfront_sites" {
-  source = "./modules/StaticWebsite"
+module "route53" {
+  source = "./CloudfrontCert"
+  providers = {
+    aws = aws.us-east-1
+  }
   SiteTags = var.SiteTags
   domainName = var.domainName
-  subDomainName = "testtf.playtoday.cc"
+  subDomainName = var.subDomainName
+}
+
+module "cloudfront" {
+  source ="./CloudfrontSetup"
+  SiteTags = var.SiteTags
+  domainName = var.domainName
+  subDomainName = var.subDomainName
+  certArn = module.route53.aws_acm_certificate_arn
 }

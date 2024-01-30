@@ -1,5 +1,5 @@
 locals {
-  s3_origin_id = "myS3Origin"
+  s3_origin_id = aws_s3_bucket.website.bucket_regional_domain_name
 }
 
 data "aws_cloudfront_cache_policy" "cache-optimized" {
@@ -7,12 +7,14 @@ data "aws_cloudfront_cache_policy" "cache-optimized" {
 }
 resource "aws_cloudfront_origin_access_control" "cf_oac" {
   name                              = "Website"
-  description                       = "Example Policy"
+  description                       = "Access Policy for ${aws_s3_bucket.website.bucket}"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
   signing_protocol                  = "sigv4"
 }
-
+resource "aws_cloudfront_origin_access_identity" "oai" {
+  
+}
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
     domain_name              = aws_s3_bucket.website.bucket_regional_domain_name

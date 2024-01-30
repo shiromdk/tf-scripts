@@ -30,12 +30,12 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   aliases = [var.subDomainName]
 
   default_cache_behavior {
-    allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+    allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = local.s3_origin_id
     compress = true
     cache_policy_id = data.aws_cloudfront_cache_policy.cache-optimized.id
-    viewer_protocol_policy = "allow-all"
+    viewer_protocol_policy = "redirect-to-https"
     min_ttl                = 0
     default_ttl            = 3600
     max_ttl                = 86400

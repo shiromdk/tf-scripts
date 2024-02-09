@@ -12,9 +12,9 @@ provider "aws" {
   
 }
 
-module "cloudfront_sites" {
-  source = "./modules/StaticWebsite"
-  SiteTags = var.SiteTags
-  domainName = var.domainName
-  subDomainName = "testtf.playtoday.cc"
-}
+# module "cloudfront_sites" {
+#   source = "./modules/StaticWebsite"
+#   SiteTags = var.SiteTags
+#   domainName = var.domainName
+#   subDomainName = "testtf.playtoday.cc"
+# }

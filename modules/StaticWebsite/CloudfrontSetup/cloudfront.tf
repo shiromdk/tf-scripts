@@ -6,7 +6,7 @@ data "aws_cloudfront_cache_policy" "cache-optimized" {
   name = "Managed-CachingOptimized"
 }
 resource "aws_cloudfront_origin_access_control" "cf_oac" {
-  name                              = "Website"
+  name                              = "${var.subDomainName} OAC"
   description                       = "Access Policy for ${aws_s3_bucket.website.bucket}"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
@@ -72,4 +72,8 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     response_page_path = "/index.html"
     error_caching_min_ttl = 60
   }
+}
+
+output "cloudfront_distribution_id" {
+  value = aws_cloudfront_distribution.s3_distribution.id
 }

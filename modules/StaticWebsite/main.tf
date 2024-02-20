@@ -29,3 +29,7 @@ module "cloudfront" {
   subDomainName = var.subDomainName
   certArn = module.route53.aws_acm_certificate_arn
 }
+
+output "cloudfront_distribution_id" {
+  value = module.cloudfront.cloudfront_distribution_id
+}

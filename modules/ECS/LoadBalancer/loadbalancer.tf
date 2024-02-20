@@ -62,6 +62,3 @@ resource "aws_subnet" "private_subnets" {
  }
 }
 
-resource "aws_vpc" "pt_vpc" {
-  cidr_block = "10.0.0.0/16"
-}

@@ -1,10 +1,10 @@
-terraform {
-  backend "s3" {
-    bucket = "terraform.state.playtoday.cc"
-    key    = "clive.ai/terraform.tfstate"
-    region = "ap-southeast-2"
-  }
-}
+# terraform {
+#   backend "s3" {
+#     bucket = "terraform.state.playtoday.cc"
+#     key    = "testabc.playtoday.cc/terraform.tfstate"
+#     region = "ap-southeast-2"
+#   }
+# }
 provider "aws" {
   region = "ap-southeast-2"
   shared_config_files = ["C:/Users/c3131/.aws/config"]
@@ -23,9 +23,12 @@ provider "aws" {
 #   source = "./modules/StaticWebsite"
 #   SiteTags = var.SiteTags
 #   domainName = var.domainName
-#   subDomainName = "testtf.playtoday.cc"
+#   subDomainName = "testabc.playtoday.cc"
 # }
 
+# output "cloudfront_distribution_id" {
+#   value = module.cloudfront_sites.cloudfront_distribution_id
+# }
 module "ecs" {
   source = "./modules/ECS"
 }

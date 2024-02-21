@@ -1,27 +1,3 @@
-resource "aws_security_group" "external_load_balancer_sg" {
-    name = "external-load-balancer-sg"
-    description = "Security Group for external load balancer"
-
-    ingress{
-        from_port = 443
-        to_port = 443
-        protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
-
-    ingress{
-        from_port = 80
-        to_port = 80
-        protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
-    egress{
-        from_port = 80
-        to_port = 80
-        protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
-}
 
 resource "aws_lb" "external_load_balancer" {
   name = "external-load-balancer"
@@ -32,4 +8,23 @@ resource "aws_lb" "external_load_balancer" {
 }
 
 
+resource "aws_alb_target_group" "default-target-group" {
+  name= "Target Group 1"
+  port = 80
+  protocol = "HTTP"
+  vpc_id = aws_vpc.pt_vpc.id
 
+  health_check {
+    path = var.health_check_path
+    port = "traffic-port"
+    healthy_threshold   = 5
+    unhealthy_threshold = 2
+    timeout        = 2
+    interval            = 60
+    matcher             = "200"
+  } 
+}
+
+resource "aws_autoscaling_attachment" "pt-autoscaling-attachment" {
+  autoscaling_group_name = aws_auto
+}

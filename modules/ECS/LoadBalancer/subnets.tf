@@ -76,7 +76,7 @@ resource "aws_route" "public-internet-igw-route" {
   destination_cidr_block = "0.0.0.0/0"
 }
 
-# Route Nat Gatewat
+# Route Nat Gateway
 
 resource "aws_route" "private-route" {
   route_table_id = aws_route_table.private-route-table.id

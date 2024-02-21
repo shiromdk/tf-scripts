@@ -1,4 +1,4 @@
-resource "aws_security_group" "external_load_balancer_sg" {
+resource "aws_security_group" "external-load-balancer-sg" {
     name = "external-load-balancer-sg"
     description = "Security Group for external load balancer"
 
@@ -23,14 +23,14 @@ resource "aws_security_group" "external_load_balancer_sg" {
     }
 }
 
-resource "aws_security_group" "ec2_sg" {
+resource "aws_security_group" "ec2-sg" {
     name ="ec2-security-group"
     description = "Security group for ec2 instances"
     ingress {
     from_port       = 0
     to_port         = 0
     protocol        = "-1"
-    security_groups = [aws_security_group.external_load-balancer.id]
+    security_groups = [aws_security_group.external-load-balancer-sg.id]
   }
 
   ingress {

@@ -4,6 +4,7 @@ provider "aws" {
   profile = "terraform"
 }
 
-module "load_balancer" {
-  source = "./LoadBalancer"
+module "cluster" {
+  source = "./Cluster"
 }
+

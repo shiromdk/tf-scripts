@@ -1,6 +1,6 @@
 resource "aws_autoscaling_group" "ecs_asg" {
     name = "PlayTodayASG"
-    desired_capacity    = 2
+    desired_capacity    = 1
     min_size = 1
     max_size = 3
 

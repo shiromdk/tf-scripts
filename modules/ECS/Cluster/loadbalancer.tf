@@ -14,7 +14,7 @@ resource "aws_alb_target_group" "default-target-group" {
   port = 80
   protocol = "HTTP"
   vpc_id = aws_vpc.pt_vpc.id
-
+  target_type = "ip"
   health_check {
     path = var.health_check_path
     port = "traffic-port"

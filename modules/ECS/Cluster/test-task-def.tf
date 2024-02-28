@@ -1,25 +1,26 @@
-resource "aws_ecs_task_definition" "app_task" {
-  family                   = "app-first-task" # Name your task
-  container_definitions    = <<DEFINITION
-  [
-    {
-      "name": "app-first-task",
-      "image": "",
-      "essential": true,
-      "portMappings": [
-        {
-          "containerPort": 5000,
-          "hostPort": 5000
-        }
-      ],
-      "memory": 512,
-      "cpu": 256
-    }
-  ]
-  DEFINITION
-#   requires_compatibilities = ["FARGATE"] # use Fargate as the launch type
-  network_mode             = "awsvpc"    # add the AWS VPN network mode as this is required for Fargate
-  memory                   = 512         # Specify the memory the container requires
-  cpu                      = 256         # Specify the CPU the container requires
-  execution_role_arn       = "${aws_iam_role.ecsTaskExecutionRole.arn}"
+resource "aws_ecs_task_definition" "ecs_task_definition" {
+ family             = "my-ecs-task"
+ network_mode       = "awsvpc"
+ execution_role_arn = "arn:aws:iam::532199187081:role/ecsTaskExecutionRole"
+ cpu                = 256
+ runtime_platform {
+   operating_system_family = "LINUX"
+   cpu_architecture        = "X86_64"
+ }
+ container_definitions = jsonencode([
+   {
+     name      = "dockergs"
+     image     = "hello-world"
+     cpu       = 256
+     memory    = 512
+     essential = true
+     portMappings = [
+       {
+         containerPort = 80
+         hostPort      = 80
+         protocol      = "tcp"
+       }
+     ]
+   }
+ ])
 }

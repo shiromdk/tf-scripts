@@ -21,7 +21,7 @@ resource "aws_ecs_service" "pt_ecs_service" {
   }
   load_balancer {
     target_group_arn = aws_alb_target_group.default-target-group.arn
-    container_name = "hello-world"
+    container_name = "dockergs"
     container_port = 80
   } 
    depends_on = [aws_autoscaling_group.ecs_asg]

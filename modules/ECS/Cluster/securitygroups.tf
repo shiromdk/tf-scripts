@@ -1,6 +1,7 @@
 resource "aws_security_group" "external-load-balancer-sg" {
     name = "external-load-balancer-sg"
     description = "Security Group for external load balancer"
+    vpc_id = aws_vpc.pt_vpc.id
 
     ingress{
         from_port = 443
@@ -26,6 +27,7 @@ resource "aws_security_group" "external-load-balancer-sg" {
 resource "aws_security_group" "ec2-sg" {
     name ="ec2-security-group"
     description = "Security group for ec2 instances"
+    vpc_id = aws_vpc.pt_vpc.id
     ingress {
     from_port       = 0
     to_port         = 0

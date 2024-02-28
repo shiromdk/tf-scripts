@@ -1,7 +1,7 @@
 resource "aws_ecs_task_definition" "ecs_task_definition" {
  family             = "my-ecs-task"
  network_mode       = "awsvpc"
- execution_role_arn = "arn:aws:iam::532199187081:role/ecsTaskExecutionRole"
+ execution_role_arn = aws_iam_role.ecsTaskExecutionRole.arn
  cpu                = 256
  runtime_platform {
    operating_system_family = "LINUX"
@@ -10,7 +10,7 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
  container_definitions = jsonencode([
    {
      name      = "dockergs"
-     image     = "hello-world"
+     image     = "hello-world:latest"
      cpu       = 256
      memory    = 512
      essential = true

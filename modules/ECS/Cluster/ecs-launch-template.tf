@@ -2,11 +2,9 @@ resource "aws_launch_template" "ecs_lt" {
  name_prefix   = "ecs-template"
  image_id      = "ami-07e1aeb90edb268a3"
  instance_type = "t3.micro"
-
- key_name               = "ec2ecsglog"
  vpc_security_group_ids = [aws_security_group.ec2-sg.id]
  iam_instance_profile {
-   name = "ecsInstanceRole"
+   arn = aws_iam_instance_profile.ecsInstanceRole_profile.arn
  }
 
  block_device_mappings {
@@ -23,6 +21,6 @@ resource "aws_launch_template" "ecs_lt" {
      Name = "ecs-instance"
    }
  }
-
+  depends_on = [ aws_iam_role.ecsInstanceRole ]
 #  user_data = filebase64("${path.module}/ecs.sh")
 }

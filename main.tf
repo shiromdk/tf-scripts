@@ -30,5 +30,5 @@ provider "aws" {
 #   value = module.cloudfront_sites.cloudfront_distribution_id
 # }
 module "ecs" {
-  source = "./modules/ECS"
+  source = "./modules/Cluster"
 }

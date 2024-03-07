@@ -13,7 +13,7 @@ resource "aws_launch_template" "ecs_lt" {
      volume_size = 30
      volume_type = "gp2"
    }
- }
+ }                                           
 
  tag_specifications {
    resource_type = "instance"
@@ -22,5 +22,5 @@ resource "aws_launch_template" "ecs_lt" {
    }
  }
   depends_on = [ aws_iam_role.ecsInstanceRole ]
-#  user_data = filebase64("${path.module}/ecs.sh")
+  user_data = filebase64("${path.module}/ecs.sh")
 }

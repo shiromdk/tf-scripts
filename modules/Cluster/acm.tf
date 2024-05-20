@@ -1,7 +1,7 @@
 # SSL Certificate
 resource "aws_acm_certificate" "ssl_certificate" {
   provider                  = aws
-  domain_name               = "*.playtoday.cc"
+  domain_name               = "*.domain"
   validation_method         = "DNS"
 
   lifecycle {
